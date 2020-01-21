@@ -35,7 +35,8 @@ class Canvas extends React.Component {
             // only use nodes with specific key
             const dataToRender = json.filter(item => item["Prefab"] = "HandLineRendererVariant")
             
-            const SCALE = width / 2;
+            const SCALE_X = width / 1.5;
+            const SCALE_Y = width / RATIO / 1.0 ;
 
             dataToRender.forEach(item => {
                 const strokeArr = item["Stroke"];
@@ -47,13 +48,13 @@ class Canvas extends React.Component {
 
                 this.ctx.beginPath();
                 const startPoint = linePoints[0]
-                this.ctx.moveTo(startPoint[0] * SCALE, -startPoint[1] * SCALE);
+                this.ctx.moveTo(startPoint[0] * SCALE_X, -startPoint[1] * SCALE_Y);
                 for (let i = 1; i < linePoints.length; i++) {
                     const point = linePoints[i];
                     if (item["PointMask"][i] === 1) {
-                        this.ctx.lineTo(point[0] * SCALE, - point[1] * SCALE);
+                        this.ctx.lineTo(point[0] * SCALE_X, -point[1] * SCALE_Y);
                     } else {
-                        this.ctx.moveTo(point[0] * SCALE, - point[1] * SCALE)
+                        this.ctx.moveTo(point[0] * SCALE_X, -point[1] * SCALE_Y)
                     }
                     
                 }
